@@ -102,45 +102,6 @@
     this.vrSession.end();
   }
 
-  XRManager.prototype.DeviceXRPermissionGranted = function () {
-    if ( typeof( DeviceMotionEvent ) !== "undefined" && typeof( DeviceMotionEvent.requestPermission ) === "function" )  //means it is iphone or device that doesn't have vr permission
-    {
-    // (optional) Do something before API request prompt.
-    DeviceMotionEvent.requestPermission().then( response => {
-    // (optional) Do something after API prompt dismissed.
-    if ( response == "granted" ) {
-      alert("PermissionGranted");
-    }
-    else
-    {
-    alert( "DeviceMotionEvent not Granted" );
-    }
-    }).catch( e => {
-    console.error(e);
-    alert( " DeviceMotionEvent error "  + console.error(e));
-    } )
-    }
-    else
-    {
-      alert("No DeviceMotionEvent function available");
-    }
-    
-  }
-  
-  XRManager.prototype.CheckXRPermission = function () {
-      DeviceOrientationEvent.requestPermission()
-        .then(permissionState => {
-          if (permissionState === 'granted') {
-                  alert("DeviceOrientationEvent PermissionGranted");
-            window.addEventListener('deviceorientation', () => {});
-            this.DeviceXRPermissionGranted();
-          }
-        }).catch( e => {
-          alert( " DeviceOrientationEvent error "  + e);
-          } );
-        
-  }
-
   XRManager.prototype.onEndSession = function (session) {
     if (session && session.end) {
       session.end();
@@ -162,20 +123,15 @@
     DeviceMotionEvent.requestPermission().then( response => {
     // (optional) Do something after API prompt dismissed.
     if ( response == "granted" ) {
-      alert("PermissionGranted");
     }
     else
     {
-    alert( "DeviceMotionEvent not Granted" );
+    alert( "DeviceMotionEvent not Granted, Please clear cache and try again" );
     }
     }).catch( e => {
     console.error(e);
     alert( " DeviceMotionEvent error "  + e);
     } )
-    }
-    else
-    {
-      alert("No DeviceMotionEvent function available");
     }
 
 
